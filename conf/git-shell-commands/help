@@ -1,0 +1,10 @@
+#!/bin/sh
+
+#shellcheck disable=SC1091
+. /srv/env
+
+echo "Availables commands :"
+echo " create REPO_NAME : create a git repo"
+echo " show REPO_NAME : get clone url"
+echo " list : list availables repos"
+echo

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+#shellcheck disable=SC1091
+. /srv/env
+
+ls --color=auto "$REPO_ROOT/$USER"
