@@ -10,6 +10,7 @@ RUN set -eux; \
 WORKDIR /srv/
 
 COPY bin bin
+COPY common.sh common.sh
 COPY conf conf
 
 RUN mkdir -p /srv/accounts

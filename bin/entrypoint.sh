@@ -1,6 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
-cd /srv/bin || exit
+set -eu
+#shellcheck source=common.sh
+. /srv/common.sh
+
+safe_cd /srv/bin
+
 myself=$(basename "$0")
 
 for file in *

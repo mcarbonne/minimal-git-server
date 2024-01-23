@@ -1,9 +1,13 @@
 #!/bin/bash
 
+set -eu
+#shellcheck source=common.sh
+. /srv/common.sh
+
 for usercfg in /srv/accounts/*; do
-    IFS=":" read -r -a params <<< "$(basename "$usercfg")"
-    user=${params[0]}
-    uid=${params[1]}
+    check_account_format "$usercfg"
+    user=$(get_account_user "$usercfg") || die "$user"
+    uid=$(get_account_uid "$usercfg") || die "$uid"
 
     current_uid=$(id -u "$user" 2>/dev/null || echo "0")
 
@@ -18,8 +22,7 @@ for usercfg in /srv/accounts/*; do
         cp -R /srv/conf/git-shell-commands /home/"$user"/git-shell-commands
         chmod -R 755 /home/"$user"/git-shell-commands
     elif [[ "$current_uid" != "$uid" ]]; then
-        echo "Fatal, cannot change UID (from $current_uid to $uid). Please re-create container.";
-        exit 1
+        die "Fatal, cannot change UID (from $current_uid to $uid). Please re-create container.";
     else
         continue
     fi
