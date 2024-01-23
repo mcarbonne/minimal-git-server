@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -eu
+shopt -s nullglob
 #shellcheck source=common.sh
 . /srv/common.sh
 
