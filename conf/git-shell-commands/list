@@ -1,6 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
 #shellcheck disable=SC1091
 . /srv/env
 
-ls --color=auto "$REPO_ROOT/$USER"
+
+for repo in $(find "$REPO_ROOT/$USER" -name "config" | sort)
+do
+    folder=$(dirname "$repo")
+    repo_name=${folder#"$REPO_ROOT/$USER/"}
+    echo "$repo_name"
+done

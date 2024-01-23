@@ -31,3 +31,39 @@ shared:12347
 
 For every account, create a folder `username:uid` in /srv/accounts.
 Put every public keys allowed to access this account in the created directory.
+
+
+# Usage
+To manage your repositories, simply login to the desired account:
+```
+$ ssh ACCOUNT@HOSTNAME -p PORT
+Availables commands :
+ create REPO_NAME : create a git repo
+ show REPO_NAME : get clone url
+ list : list availables repos
+
+git> list
+git> create tests/repo-a
+Creating repo tests/repo-a
+[ ... ]
+Initialized empty Git repository in /srv/git/ACCOUNT/tests/repo-a/
+You can now clone it :
+git clone ssh://ACCOUNT@HOSTNAME:PORT/srv/git/ACCOUNT/tests/repo-a
+git> create tests/repo-b
+Creating repo tests/repo-b
+[ ... ]
+Initialized empty Git repository in /srv/git/ACCOUNT/tests/repo-b/
+You can now clone it :
+git clone ssh://ACCOUNT@HOSTNAME:PORT/srv/git/ACCOUNT/tests/repo-b
+git> create repo-c
+Creating repo repo-c
+[ ... ]
+Initialized empty Git repository in /srv/git/ACCOUNT/repo-c/
+You can now clone it :
+git clone ssh://ACCOUNT@HOSTNAME:PORT/srv/git/ACCOUNT/repo-c
+git> list
+repo-c
+tests/repo-a
+tests/repo-b
+git> 
+
