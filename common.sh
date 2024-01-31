@@ -7,32 +7,46 @@ safe_cd()
     cd "$1" || die "$1 not found"
 }
 
-check_account_format()
+cfg_count_user()
 {
-    local usercfg="$1"
-    local params
-    IFS=":" read -r -a params <<< "$(basename "$usercfg")"
-    if [ "${#params[@]}" -ne 2 ]; then
-        die "Bad format for account $usercfg"
+    yq ".accounts | length" /srv/config.yml
+}
+
+cfg_get_account_user()
+{
+    local index="$1"
+    local user
+    user=$(yq ".accounts[$index].user" /srv/config.yml)
+    if [[ "$user" =~ ^[a-z][-a-z0-9_]*$ ]]; then
+        echo "$user"
+    else
+        die "Illegal user '$user'"
     fi
 }
 
-get_account_user()
+cfg_get_account_uid()
 {
-    local usercfg="$1"
-    local params
-    IFS=":" read -r -a params <<< "$(basename "$usercfg")"
-    echo "${params[0]}"
-}
-
-get_account_uid()
-{
-    local usercfg="$1"
-    local params
-    IFS=":" read -r -a params <<< "$(basename "$usercfg")"
-    local uid=${params[1]}
+    local index="$1"
+    local uid
+    uid=$(yq ".accounts[$index].uid" /srv/config.yml)
     case $uid in
         ''|*[!0-9]*) die "Illegal uid '$uid'" ;;
         *) echo "$uid";;
     esac
+}
+
+cfg_get_account_keys()
+{
+    local index="$1"
+    yq '.accounts['"$index"'].keys | join("\n")' /srv/config.yml
+}
+
+cfg_external_hostname()
+{
+    yq '.external_hostname' /srv/config.yml
+}
+
+cfg_external_port()
+{
+    yq '.external_port' /srv/config.yml
 }

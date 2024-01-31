@@ -1,13 +1,11 @@
 #!/bin/bash
 
 set -eu
-shopt -s nullglob
 #shellcheck source=common.sh
 . /srv/common.sh
 
-for usercfg in /srv/accounts/*; do
-    check_account_format "$usercfg"
-    user=$(get_account_user "$usercfg") || die "$user"
+for ((i=0; i<$(cfg_count_user); i++)); do
+    user=$(cfg_get_account_user "$i") || die "$user"
 
     echo "Setting up repos for $user"
     if [ ! -d /srv/git/"$user" ]; then

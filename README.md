@@ -5,32 +5,31 @@ It supports multiple accounts.
 
 # Minimal configuration
 
-This container requires 3 volumes in order to correctly persist data :
+This container requires 3 volumes in order to work:
 - `/srv/ssh` to persist generated server keys
 - `/srv/git` to store repositories
-- `/srv/accounts` to setup available accounts, with allowed public keys
+- `/srv/config.yml` to setup accounts, allowed public keys...
 
 ```
-docker run -v .../ssh:/srv/ssh -v .../git:/srv/git -v .../accounts:/srv/accounts \
-        --env EXTERNAL_PORT=20222 --env EXTERNAL_HOSTNAME=xxxx \
+docker run -v .../ssh:/srv/ssh -v .../git:/srv/git -v .../config.yml:/srv/config.yml:ro \
         --name minimal-git-server -d -p 20222:22 ghcr.io/mcarbonne/minimal-git-server:latest
 ```
 
 
-# /srv/accounts structure
+# config.yml
 
+```yaml
+external_hostname: localhost
+external_port: 20222
+accounts:
+  - user: user_a
+    id: 12345
+    keys:
+      - "ssh-rsa XXXXXX user_a@gmail.com"
+      - "ssh-rsa XXXXXX user_a@hotmail.com"
+  - user: user_b
+[...]
 ```
-user-A:12345
-  key_A.pub
-user-B:12346
-  key_B.pub
-shared:12347
-  key_A.pub
-  key_B.pub
-```
-
-For every account, create a folder `username:uid` in /srv/accounts.
-Put every public keys allowed to access this account in the created directory.
 
 
 # Usage

@@ -5,7 +5,7 @@ RUN set -eux; \
     bash \
     openssh \
     git \
-    jq
+    yq
 
 WORKDIR /srv/
 
@@ -13,11 +13,7 @@ COPY bin bin
 COPY common.sh common.sh
 COPY conf conf
 
-RUN mkdir -p /srv/accounts
 RUN echo -n "" > /etc/motd
-
-ENV EXTERNAL_PORT="2222"
-ENV EXTERNAL_HOSTNAME="localhost"
 
 EXPOSE 22
 

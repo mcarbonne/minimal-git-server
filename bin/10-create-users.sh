@@ -1,14 +1,12 @@
 #!/bin/bash
 
 set -eu
-shopt -s nullglob
 #shellcheck source=common.sh
 . /srv/common.sh
 
-for usercfg in /srv/accounts/*; do
-    check_account_format "$usercfg"
-    user=$(get_account_user "$usercfg") || die "$user"
-    uid=$(get_account_uid "$usercfg") || die "$uid"
+for ((i=0; i<$(cfg_count_user); i++)); do
+    user=$(cfg_get_account_user "$i") || die "$user"
+    uid=$(cfg_get_account_uid "$i") || die "$uid"
 
     current_uid=$(id -u "$user" 2>/dev/null || echo "0")
 
