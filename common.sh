@@ -1,6 +1,13 @@
 #!/bin/bash
 
-die() { echo "fatal: $*"; exit 1; }
+safe_tput()
+{
+    if [[ -t 1 ]]; then
+        tput "$@"
+    fi
+}
+
+die() { safe_tput setaf 1; echo "fatal: $*"; safe_tput sgr0; exit 1; }
 
 safe_cd()
 {

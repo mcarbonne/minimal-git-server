@@ -34,12 +34,15 @@ accounts:
 
 # Usage
 To manage your repositories, simply login to the desired account:
-```
+```console
 $ ssh ACCOUNT@HOSTNAME -p PORT
 Availables commands :
- create REPO_NAME : create a git repo
- show REPO_NAME : get clone url
- list : list availables repos
+create:	[REPO_NAME] create a git repo
+exists:	[REPO_NAME] if REPO_NAME exists and is a valid git repository, return 0 otherwise 1
+list:	list all available repositories
+remove:	[TARGET] remove TARGET directory/repo
+rename:	[SOURCE TARGET] rename SOURCE to TARGET. Might either be folders of git repos
+show:	[REPO_NAME] show clone URL
 
 git> list
 git> create tests/repo-a

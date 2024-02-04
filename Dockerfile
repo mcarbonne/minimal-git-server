@@ -5,12 +5,14 @@ RUN set -eux; \
     bash \
     openssh \
     git \
-    yq
+    yq \
+    ncurses
 
 WORKDIR /srv/
 
 COPY bin bin
 COPY common.sh common.sh
+COPY git-shell-commands-common.sh git-shell-commands-common.sh
 COPY conf conf
 
 RUN echo -n "" > /etc/motd

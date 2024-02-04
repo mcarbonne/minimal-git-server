@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#HELP list all available repositories
+
 #shellcheck disable=SC1091
 . /srv/env
 
