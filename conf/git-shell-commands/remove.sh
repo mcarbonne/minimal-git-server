@@ -3,7 +3,7 @@
 #HELP [TARGET] remove TARGET directory/repo
 
 show_usage() {
-    echo "Usage: rename TARGET"
+    echo "Usage: remove TARGET"
 }
 
 # shellcheck disable=SC1091
