@@ -17,13 +17,12 @@ then
     exit 1
 fi
 
-ok "Creating repo $1"
 GIT_REPO="${REPO_ROOT}/$USER/$1"
 if [ -d "$GIT_REPO" ]; then
     die "Already exists, skipped !"
 fi
-git init --bare "$GIT_REPO"
+git init -q --bare "$GIT_REPO"
 
 
-ok "You can now clone it :"
+echo "You can now clone it :"
 ok "git clone ssh://${USER}@$EXTERNAL_HOSTNAME:$EXTERNAL_PORT${GIT_REPO}"

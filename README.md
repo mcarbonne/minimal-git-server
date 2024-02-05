@@ -1,9 +1,20 @@
+# minimal-git-server
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Tag](https://img.shields.io/github/v/tag/mcarbonne/minimal-git-server)](https://github.com/mcarbonne/minimal-git-server/tags)
+[![Stars](https://img.shields.io/github/stars/mcarbonne/minimal-git-server.svg)](https://github.com/mcarbonne/minimal-git-server)
+
 Originally inspired by https://github.com/jkarlosb/git-server-docker
 
 This container allows to run a minimal git server with a basic CLI to manage repositories.
 It supports multiple accounts.
 
-# Minimal configuration
+## Features
+- support multiple accounts (config.yml)
+- basic CLI to manage repositories (list/create/rename/remove/...)
+- easily usable in scripts
+- tested on docker and podman
+
+## Minimal configuration
 
 This container requires 3 volumes in order to work:
 - `/srv/ssh` to persist generated server keys
@@ -16,7 +27,7 @@ docker run -v .../ssh:/srv/ssh -v .../git:/srv/git -v .../config.yml:/srv/config
 ```
 
 
-# config.yml
+## config.yml
 
 ```yaml
 external_hostname: localhost
@@ -32,40 +43,13 @@ accounts:
 ```
 
 
-# Usage
+## Basic Usage
 To manage your repositories, simply login to the desired account:
+![Basic Usage](doc/basic-usage.png)
+
+## How to script ?
+You can easily embed any supported command in your scripts:
 ```console
-$ ssh ACCOUNT@HOSTNAME -p PORT
-Availables commands :
-create:	[REPO_NAME] create a git repo
-exists:	[REPO_NAME] if REPO_NAME exists and is a valid git repository, return 0 otherwise 1
-list:	list all available repositories
-remove:	[TARGET] remove TARGET directory/repo
-rename:	[SOURCE TARGET] rename SOURCE to TARGET. Might either be folders of git repos
-show:	[REPO_NAME] show clone URL
-
-git> list
-git> create tests/repo-a
-Creating repo tests/repo-a
-[ ... ]
-Initialized empty Git repository in /srv/git/ACCOUNT/tests/repo-a/
-You can now clone it :
-git clone ssh://ACCOUNT@HOSTNAME:PORT/srv/git/ACCOUNT/tests/repo-a
-git> create tests/repo-b
-Creating repo tests/repo-b
-[ ... ]
-Initialized empty Git repository in /srv/git/ACCOUNT/tests/repo-b/
-You can now clone it :
-git clone ssh://ACCOUNT@HOSTNAME:PORT/srv/git/ACCOUNT/tests/repo-b
-git> create repo-c
-Creating repo repo-c
-[ ... ]
-Initialized empty Git repository in /srv/git/ACCOUNT/repo-c/
-You can now clone it :
-git clone ssh://ACCOUNT@HOSTNAME:PORT/srv/git/ACCOUNT/repo-c
-git> list
-repo-c
-tests/repo-a
-tests/repo-b
-git> 
-
+$ ssh ACCOUNT@HOSTNAME -p PORT create project1/my_repo
+```
+Have a look at `test.sh` for more examples.
