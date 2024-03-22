@@ -5,13 +5,24 @@
 
 Originally inspired by https://github.com/jkarlosb/git-server-docker
 
-This container allows to run a minimal git server with a basic CLI to manage repositories.
-It supports multiple accounts.
+This container lets you run a minimal git server with a basic CLI to manage repositories, supporting multiple accounts.
+
+## Versioning and packaging
+This tool follows [semantic versioning](https://semver.org/).
+
+Pre-built images are available on github packages:
+- `ghcr.io/mcarbonne/minimal-git-server:main` (`main` branch)
+- `ghcr.io/mcarbonne/minimal-git-server:latest`: latest tagged version
+- `ghcr.io/mcarbonne/minimal-git-server:x.x.x`
+- `ghcr.io/mcarbonne/minimal-git-server:x.x`
+- `ghcr.io/mcarbonne/minimal-git-server:x`
+
+When using automatic updates ([watchtower](https://github.com/containrrr/watchtower), [podman-auto-update](https://docs.podman.io/en/latest/markdown/podman-auto-update.1.html)...), using the lastest major tag available (`ghcr.io/mcarbonne/minimal-git-server:2`) is recommanded to avoid breaking changes.
 
 ## Features
 - support multiple accounts (config.yml)
 - basic CLI to manage repositories (list/create/rename/remove/...)
-- easily usable in scripts
+- easy to use in scripts
 - tested on docker and podman
 
 ## Minimal configuration
@@ -19,11 +30,11 @@ It supports multiple accounts.
 This container requires 3 volumes in order to work:
 - `/srv/ssh` to persist generated server keys
 - `/srv/git` to store repositories
-- `/srv/config.yml` to setup accounts, allowed public keys...
+- `/srv/config.yml` to set up accounts, allowed public keys...
 
 ```
 docker run -v .../ssh:/srv/ssh -v .../git:/srv/git -v .../config.yml:/srv/config.yml:ro \
-        --name minimal-git-server -d -p 20222:22 ghcr.io/mcarbonne/minimal-git-server:latest
+        --name minimal-git-server -d -p 20222:22 ghcr.io/mcarbonne/minimal-git-server:2
 ```
 
 
@@ -44,7 +55,7 @@ accounts:
 
 
 ## Basic Usage
-To manage your repositories, simply login to the desired account:
+To manage your repositories, simply log in:
 ![Basic Usage](doc/basic-usage.png)
 
 ## How to script ?
