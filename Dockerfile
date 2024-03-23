@@ -1,4 +1,4 @@
-FROM alpine:3.19
+FROM alpine:3.19.1
 
 RUN set -eux; \
   apk add --no-cache \

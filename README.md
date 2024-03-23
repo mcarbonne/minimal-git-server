@@ -5,25 +5,26 @@
 
 Originally inspired by https://github.com/jkarlosb/git-server-docker
 
-This container lets you run a minimal git server with a basic CLI to manage repositories, supporting multiple accounts.
-
-## Versioning and packaging
-This tool follows [semantic versioning](https://semver.org/).
-
-Pre-built images are available on github packages:
-- `ghcr.io/mcarbonne/minimal-git-server:main` (`main` branch)
-- `ghcr.io/mcarbonne/minimal-git-server:latest`: latest tagged version
-- `ghcr.io/mcarbonne/minimal-git-server:x.x.x`
-- `ghcr.io/mcarbonne/minimal-git-server:x.x`
-- `ghcr.io/mcarbonne/minimal-git-server:x`
-
-When using automatic updates ([watchtower](https://github.com/containrrr/watchtower), [podman-auto-update](https://docs.podman.io/en/latest/markdown/podman-auto-update.1.html)...), using the lastest major tag available (`ghcr.io/mcarbonne/minimal-git-server:2`) is recommanded to avoid breaking changes.
+This tool lets you run a minimal git server with a basic CLI to manage repositories, all in a container based on a single configuration file.
 
 ## Features
 - support multiple accounts (config.yml)
 - basic CLI to manage repositories (list/create/rename/remove/...)
 - easy to use in scripts
 - tested on docker and podman
+
+## Versioning and packaging
+This tool follows [semantic versioning](https://semver.org/).
+
+Pre-built images are available on github packages:
+- `ghcr.io/mcarbonne/minimal-git-server:main` (`main` branch)
+- `ghcr.io/mcarbonne/minimal-git-server:dev` (`dev` branch)
+- `ghcr.io/mcarbonne/minimal-git-server:latest`: latest tagged version
+- `ghcr.io/mcarbonne/minimal-git-server:x.x.x`
+- `ghcr.io/mcarbonne/minimal-git-server:x.x`
+- `ghcr.io/mcarbonne/minimal-git-server:x`
+
+For automatic updates ([watchtower](https://github.com/containrrr/watchtower), [podman-auto-update](https://docs.podman.io/en/latest/markdown/podman-auto-update.1.html)...), using the lastest major tag available (`ghcr.io/mcarbonne/minimal-git-server:2`) is recommanded to avoid breaking changes.
 
 ## Minimal configuration
 
