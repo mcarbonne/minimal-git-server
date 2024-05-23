@@ -5,7 +5,7 @@ RUN set -eux; \
     bash \
     openssh \
     git \
-    yq \
+    yq-go \
     ncurses
 
 WORKDIR /srv/
