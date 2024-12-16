@@ -46,7 +46,7 @@ external_hostname: localhost
 external_port: 20222
 accounts:
   - user: user_a
-    id: 12345
+    uid: 12345
     keys:
       - "ssh-rsa XXXXXX user_a@gmail.com"
       - "ssh-rsa XXXXXX user_a@hotmail.com"
